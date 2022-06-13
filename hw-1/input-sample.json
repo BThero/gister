@@ -1,0 +1,31 @@
+{
+	"name": "abc",
+	"items": [
+		{
+			"name": "abcde",
+			"items": [
+				{
+					"name": "some long name",
+					"items": [
+						{
+							"name": "short",
+							"items": [
+								{
+									"name": "cool"
+								},
+								{
+									"name": "good"
+								}
+							]
+						}
+					]
+				},
+				{ "name": 4 }
+			]
+		},
+		{
+			"name": 5,
+			"items": [{ "name": 6 }]
+		}
+	]
+}
