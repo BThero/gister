@@ -10,12 +10,14 @@ if (args.length > 1) {
 	throw new Error(`Too many arguments: expected 1, found ${args.length}`);
 }
 
-const data = JSON.parse(process.argv[2]);
+const fs = require('fs');
+const data = JSON.parse(fs.readFileSync(args[0]).toString());
 
 let dirs = 0;
 let files = 0;
+const unclosed = [];
 
-function recurse(data, depth = 0, unclosed = []) {
+function recurse(data, depth = 0) {
 	if (typeof data != 'object') {
 		throw new Error(`Error: expected "object" type, received ${typeof data}`);
 	}
@@ -55,7 +57,7 @@ function recurse(data, depth = 0, unclosed = []) {
 				unclosed.pop();
 			}
 
-			recurse(item, depth + 1, unclosed);
+			recurse(item, depth + 1);
 		});
 	} else {
 		files += 1;
