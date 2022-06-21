@@ -1,0 +1,9 @@
+{
+  "extends": ["oclif", "oclif-typescript"],
+  "rules": {
+    "quotes": ["warn", "double"],
+    "object-curly-spacing": ["warn", "always"],
+    "semi": ["warn", "always"],
+    "comma-dangle": ["warn", "only-multiline"]
+  }
+}

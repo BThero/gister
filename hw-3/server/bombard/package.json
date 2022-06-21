@@ -1,10 +1,10 @@
 {
-  "name": "hw-3",
+  "name": "bombard",
   "version": "0.0.0",
-  "description": "Homework 3",
+  "description": "Homework #3",
   "author": "Temirlan Baibolov",
   "bin": {
-    "hw-3": "./bin/run"
+    "bombard": "./bin/run"
   },
   "homepage": "https://github.com/bthero/baibolov-temirlan-hs",
   "license": "MIT",
@@ -39,8 +39,8 @@
     "typescript": "^4.4.3"
   },
   "oclif": {
-    "bin": "hw-3",
-    "dirname": "hw-3",
+    "bin": "bombard",
+    "dirname": "bombard",
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",

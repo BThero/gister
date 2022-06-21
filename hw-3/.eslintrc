@@ -1,7 +1,0 @@
-{
-  "extends": ["oclif", "oclif-typescript"],
-  "rules": {
-    "arrow-parens": ["warning", "always"],
-    "quotes": ["warning", "double"]
-  }
-}

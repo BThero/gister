@@ -16,39 +16,39 @@ oclif example Hello World CLI
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g hw-3
-$ hw-3 COMMAND
+$ npm install -g bombard
+$ bombard COMMAND
 running command...
-$ hw-3 (--version)
-hw-3/0.0.0 darwin-arm64 node-v16.14.0
-$ hw-3 --help [COMMAND]
+$ bombard (--version)
+bombard/0.0.0 darwin-arm64 node-v16.14.0
+$ bombard --help [COMMAND]
 USAGE
-  $ hw-3 COMMAND
+  $ bombard COMMAND
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`hw-3 hello PERSON`](#hw-3-hello-person)
-* [`hw-3 hello world`](#hw-3-hello-world)
-* [`hw-3 help [COMMAND]`](#hw-3-help-command)
-* [`hw-3 plugins`](#hw-3-plugins)
-* [`hw-3 plugins:install PLUGIN...`](#hw-3-pluginsinstall-plugin)
-* [`hw-3 plugins:inspect PLUGIN...`](#hw-3-pluginsinspect-plugin)
-* [`hw-3 plugins:install PLUGIN...`](#hw-3-pluginsinstall-plugin-1)
-* [`hw-3 plugins:link PLUGIN`](#hw-3-pluginslink-plugin)
-* [`hw-3 plugins:uninstall PLUGIN...`](#hw-3-pluginsuninstall-plugin)
-* [`hw-3 plugins:uninstall PLUGIN...`](#hw-3-pluginsuninstall-plugin-1)
-* [`hw-3 plugins:uninstall PLUGIN...`](#hw-3-pluginsuninstall-plugin-2)
-* [`hw-3 plugins update`](#hw-3-plugins-update)
+* [`bombard hello PERSON`](#bombard-hello-person)
+* [`bombard hello world`](#bombard-hello-world)
+* [`bombard help [COMMAND]`](#bombard-help-command)
+* [`bombard plugins`](#bombard-plugins)
+* [`bombard plugins:install PLUGIN...`](#bombard-pluginsinstall-plugin)
+* [`bombard plugins:inspect PLUGIN...`](#bombard-pluginsinspect-plugin)
+* [`bombard plugins:install PLUGIN...`](#bombard-pluginsinstall-plugin-1)
+* [`bombard plugins:link PLUGIN`](#bombard-pluginslink-plugin)
+* [`bombard plugins:uninstall PLUGIN...`](#bombard-pluginsuninstall-plugin)
+* [`bombard plugins:uninstall PLUGIN...`](#bombard-pluginsuninstall-plugin-1)
+* [`bombard plugins:uninstall PLUGIN...`](#bombard-pluginsuninstall-plugin-2)
+* [`bombard plugins update`](#bombard-plugins-update)
 
-## `hw-3 hello PERSON`
+## `bombard hello PERSON`
 
 Say hello
 
 ```
 USAGE
-  $ hw-3 hello [PERSON] -f <value>
+  $ bombard hello [PERSON] -f <value>
 
 ARGUMENTS
   PERSON  Person to say hello to
@@ -66,13 +66,13 @@ EXAMPLES
 
 _See code: [dist/commands/hello/index.ts](https://github.com/bthero/baibolov-temirlan-hs/blob/v0.0.0/dist/commands/hello/index.ts)_
 
-## `hw-3 hello world`
+## `bombard hello world`
 
 Say hello world
 
 ```
 USAGE
-  $ hw-3 hello world
+  $ bombard hello world
 
 DESCRIPTION
   Say hello world
@@ -82,13 +82,13 @@ EXAMPLES
   hello world! (./src/commands/hello/world.ts)
 ```
 
-## `hw-3 help [COMMAND]`
+## `bombard help [COMMAND]`
 
-Display help for hw-3.
+Display help for bombard.
 
 ```
 USAGE
-  $ hw-3 help [COMMAND] [-n]
+  $ bombard help [COMMAND] [-n]
 
 ARGUMENTS
   COMMAND  Command to show help for.
@@ -97,18 +97,18 @@ FLAGS
   -n, --nested-commands  Include all nested commands in the output.
 
 DESCRIPTION
-  Display help for hw-3.
+  Display help for bombard.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
-## `hw-3 plugins`
+## `bombard plugins`
 
 List installed plugins.
 
 ```
 USAGE
-  $ hw-3 plugins [--core]
+  $ bombard plugins [--core]
 
 FLAGS
   --core  Show core plugins.
@@ -117,18 +117,18 @@ DESCRIPTION
   List installed plugins.
 
 EXAMPLES
-  $ hw-3 plugins
+  $ bombard plugins
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.0.11/src/commands/plugins/index.ts)_
 
-## `hw-3 plugins:install PLUGIN...`
+## `bombard plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ hw-3 plugins:install PLUGIN...
+  $ bombard plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -150,23 +150,23 @@ DESCRIPTION
   the CLI without the need to patch and update the whole CLI.
 
 ALIASES
-  $ hw-3 plugins add
+  $ bombard plugins add
 
 EXAMPLES
-  $ hw-3 plugins:install myplugin 
+  $ bombard plugins:install myplugin 
 
-  $ hw-3 plugins:install https://github.com/someuser/someplugin
+  $ bombard plugins:install https://github.com/someuser/someplugin
 
-  $ hw-3 plugins:install someuser/someplugin
+  $ bombard plugins:install someuser/someplugin
 ```
 
-## `hw-3 plugins:inspect PLUGIN...`
+## `bombard plugins:inspect PLUGIN...`
 
 Displays installation properties of a plugin.
 
 ```
 USAGE
-  $ hw-3 plugins:inspect PLUGIN...
+  $ bombard plugins:inspect PLUGIN...
 
 ARGUMENTS
   PLUGIN  [default: .] Plugin to inspect.
@@ -179,16 +179,16 @@ DESCRIPTION
   Displays installation properties of a plugin.
 
 EXAMPLES
-  $ hw-3 plugins:inspect myplugin
+  $ bombard plugins:inspect myplugin
 ```
 
-## `hw-3 plugins:install PLUGIN...`
+## `bombard plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ hw-3 plugins:install PLUGIN...
+  $ bombard plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -210,23 +210,23 @@ DESCRIPTION
   the CLI without the need to patch and update the whole CLI.
 
 ALIASES
-  $ hw-3 plugins add
+  $ bombard plugins add
 
 EXAMPLES
-  $ hw-3 plugins:install myplugin 
+  $ bombard plugins:install myplugin 
 
-  $ hw-3 plugins:install https://github.com/someuser/someplugin
+  $ bombard plugins:install https://github.com/someuser/someplugin
 
-  $ hw-3 plugins:install someuser/someplugin
+  $ bombard plugins:install someuser/someplugin
 ```
 
-## `hw-3 plugins:link PLUGIN`
+## `bombard plugins:link PLUGIN`
 
 Links a plugin into the CLI for development.
 
 ```
 USAGE
-  $ hw-3 plugins:link PLUGIN
+  $ bombard plugins:link PLUGIN
 
 ARGUMENTS
   PATH  [default: .] path to plugin
@@ -244,16 +244,16 @@ DESCRIPTION
   command will override the user-installed or core plugin implementation. This is useful for development work.
 
 EXAMPLES
-  $ hw-3 plugins:link myplugin
+  $ bombard plugins:link myplugin
 ```
 
-## `hw-3 plugins:uninstall PLUGIN...`
+## `bombard plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ hw-3 plugins:uninstall PLUGIN...
+  $ bombard plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -266,17 +266,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ hw-3 plugins unlink
-  $ hw-3 plugins remove
+  $ bombard plugins unlink
+  $ bombard plugins remove
 ```
 
-## `hw-3 plugins:uninstall PLUGIN...`
+## `bombard plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ hw-3 plugins:uninstall PLUGIN...
+  $ bombard plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -289,17 +289,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ hw-3 plugins unlink
-  $ hw-3 plugins remove
+  $ bombard plugins unlink
+  $ bombard plugins remove
 ```
 
-## `hw-3 plugins:uninstall PLUGIN...`
+## `bombard plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ hw-3 plugins:uninstall PLUGIN...
+  $ bombard plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -312,17 +312,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ hw-3 plugins unlink
-  $ hw-3 plugins remove
+  $ bombard plugins unlink
+  $ bombard plugins remove
 ```
 
-## `hw-3 plugins update`
+## `bombard plugins update`
 
 Update installed plugins.
 
 ```
 USAGE
-  $ hw-3 plugins update [-h] [-v]
+  $ bombard plugins update [-h] [-v]
 
 FLAGS
   -h, --help     Show CLI help.
