@@ -1,6 +1,12 @@
 import { Command, Flags } from "@oclif/core";
 
-export default class Hello extends Command {
+interface IStats {
+  success: number;
+  fail: number;
+  avg: number;
+}
+
+export default class Run extends Command {
   static description = "Say hello";
 
   static examples = [
@@ -37,55 +43,28 @@ hello friend from oclif! (./src/commands/hello/index.ts)
   ];
 
   async run(): Promise<void> {
+    const timeZero = Date.now();
     const { args, flags } = await this.parse(Hello);
     const http = require("http");
 
     const reqCount = flags.requests ?? 10;
+    const concurr = flags.concurrency ?? 4;
     const withBody = flags.body;
 
     const url = args.url;
 
-    const requestPromise = (url: string) => {
-      return new Promise((resolve, reject) => {
-        http
-          .get(url, (res: any) => {
-            resolve(res);
-          })
-          .on("error", (error: any) => {
-            reject(error);
-          });
-      });
-    };
+    let success = 0;
+    let fail = 0;
+    let avg = 0;
 
-    const startTime = Date.now();
+    await bombard(reqCount, concurr, url);
 
-    for (let i = 0; i < reqCount; i += 1) {
-      requestPromise(url)
-        .then((res: any) => {
-          let data = "";
+    this.log(`bombarded ${reqCount} times`);
+    this.log(`${success} successful, ${fail} failing`);
 
-          // A chunk of data has been received.
-          res.on("data", (chunk: any) => {
-            data += chunk;
-          });
-
-          // The whole response has been received. Print out the result.
-          res.on("end", () => {
-            const endTime = Date.now();
-            this.log(`got response: ${data} in ${endTime - startTime}`);
-          });
-        })
-        .catch((error) => {
-          this.log(`got error: ${error}`);
-        });
+    if (success > 0) {
+      avg /= success;
+      this.log(`average response time ${avg / success}ms`);
     }
-
-    this.log(
-      `args: ${JSON.stringify(args, null, 2)}\nflags: ${JSON.stringify(
-        flags,
-        null,
-        2
-      )}`
-    );
   }
 }
