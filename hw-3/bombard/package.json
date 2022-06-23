@@ -19,7 +19,8 @@
   "dependencies": {
     "@oclif/core": "^1",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^2.0.1"
+    "@oclif/plugin-plugins": "^2.0.1",
+    "async": "^3.2.4"
   },
   "devDependencies": {
     "@oclif/test": "^2",
@@ -63,7 +64,7 @@
     "version": "oclif readme && git add README.md"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=12.9.0"
   },
   "bugs": "https://github.com/bthero/baibolov-temirlan-hs/issues",
   "keywords": [
