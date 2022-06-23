@@ -6,6 +6,7 @@
     "semi": ["warn", "always"],
     "comma-dangle": ["warn", "only-multiline"],
     "arrow-parens": ["warn", "always"],
-    "indent": "off"
+    "indent": "off",
+    "generator-star-spacing": "off"
   }
 }
