@@ -26,7 +26,7 @@ function* requestGenerator(
 
       axios
         .get(url, {
-          data: withBody ? randstr(10_000) : null,
+          data: withBody ? randstr(100) : null,
         })
         .then((res: any) => {
           const endTime = Date.now();
