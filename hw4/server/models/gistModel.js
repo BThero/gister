@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const gistScheme = mongoose.Schema(
+const gistSchema = mongoose.Schema(
 	{
 		title: {
 			type: String,
@@ -10,12 +10,15 @@ const gistScheme = mongoose.Schema(
 			type: String,
 			required: [true, 'Please add gist content'],
 		},
+		user: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: 'User',
+		},
 	},
 	{
 		timestamps: true,
 	}
 );
 
-module.exports = {
-	Gist: mongoose.model('Gist', gistScheme),
-};
+module.exports = mongoose.model('Gist', gistSchema);

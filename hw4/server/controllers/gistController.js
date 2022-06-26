@@ -1,8 +1,9 @@
 const asyncHandler = require('express-async-handler');
-const { Gist } = require('../models/gistModel');
+const Gist = require('../models/gistModel');
+const User = require('../models/userModel');
 
 const getGists = asyncHandler(async (req, res) => {
-	const gists = await Gist.find();
+	const gists = await Gist.find({ user: req.user.id });
 	res.status(200).json(gists);
 });
 
@@ -15,6 +16,7 @@ const setGist = asyncHandler(async (req, res) => {
 	const gist = await Gist.create({
 		title: req.body.title,
 		content: req.body.content,
+		user: req.user.id,
 	});
 
 	res.status(200).json(gist);
@@ -26,6 +28,16 @@ const updateGist = asyncHandler(async (req, res) => {
 	if (!gist) {
 		res.status(400);
 		throw new Error('Gist not found');
+	}
+
+	if (!req.user) {
+		res.status(401);
+		throw new Error('User not found');
+	}
+
+	if (gist.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('User not authorized');
 	}
 
 	const updatedGist = await Goal.findByIdAndUpdate(req.params.id, req.body, {
@@ -41,6 +53,16 @@ const deleteGist = asyncHandler(async (req, res) => {
 	if (!gist) {
 		res.status(400);
 		throw new Error('Gist not found');
+	}
+
+	if (!req.user) {
+		res.status(401);
+		throw new Error('User not found');
+	}
+
+	if (gist.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('User not authorized');
 	}
 
 	await gist.remove();
