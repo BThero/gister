@@ -8,7 +8,7 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 connectDB();
 
 const app = express();
-const port = process.env.PORT;
+const port = 4000;
 
 app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
