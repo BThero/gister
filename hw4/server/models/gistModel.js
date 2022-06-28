@@ -10,6 +10,14 @@ const gistSchema = mongoose.Schema(
 			type: String,
 			required: [true, 'Please add gist content'],
 		},
+		public: {
+			type: Boolean,
+			required: [true, 'Please add visibility of the gist'],
+		},
+		author: {
+			type: String,
+			required: [true, 'Please add an author of the gist'],
+		},
 		user: {
 			type: mongoose.Schema.Types.ObjectId,
 			required: true,

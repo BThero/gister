@@ -3,19 +3,31 @@ const Gist = require('../models/gistModel');
 const User = require('../models/userModel');
 
 const getGists = asyncHandler(async (req, res) => {
-	const gists = await Gist.find({ user: req.user.id });
+	const gists = await Gist.find({
+		$or: [
+			{
+				user: req.user.id,
+			},
+			{
+				public: true,
+			},
+		],
+	});
+
 	res.status(200).json(gists);
 });
 
 const setGist = asyncHandler(async (req, res) => {
-	if (!req.body.title || !req.body.content) {
+	if (!req.body.title || !req.body.content || req.body.public === undefined) {
 		res.status(400);
-		throw new Error('Please add a title and content');
+		throw new Error('Please add a title, content and public');
 	}
 
 	const gist = await Gist.create({
 		title: req.body.title,
 		content: req.body.content,
+		public: req.body.public,
+		author: req.user.name,
 		user: req.user.id,
 	});
 
