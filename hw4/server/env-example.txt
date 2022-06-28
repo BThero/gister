@@ -1,0 +1,4 @@
+NODE_ENV = development
+
+MONGO_URI = mongodb+srv://admin:admin@mongodb-learn.39xlb.mongodb.net/?retryWrites=true&w=majority
+JWT_SECRET = abcdef
