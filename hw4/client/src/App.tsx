@@ -1,10 +1,11 @@
-import React from 'react';
+import { lazy } from 'react';
 import useAuth, { AuthProvider } from './modules/useAuth';
-import NotAuthenticated from './pages/NotAuthenticated';
-import Home from './pages/Home';
 
 const AuthRouter = () => {
 	const { user } = useAuth();
+
+	const NotAuthenticated = lazy(() => import('./pages/NotAuthenticated'));
+	const Home = lazy(() => import('./pages/Home'));
 
 	if (!user) {
 		return <NotAuthenticated />;
@@ -13,7 +14,7 @@ const AuthRouter = () => {
 	}
 };
 
-function App() {
+const App = () => {
 	return (
 		<div>
 			<AuthProvider>
@@ -21,6 +22,6 @@ function App() {
 			</AuthProvider>
 		</div>
 	);
-}
+};
 
 export default App;

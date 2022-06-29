@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import {
+	createContext,
+	ReactNode,
+	useContext,
+	useEffect,
+	useState,
+} from 'react';
 import * as api from '../api/users';
 
 interface User {
@@ -9,15 +15,13 @@ interface User {
 }
 
 interface AuthContextType {
-	// We defined the user type in `index.d.ts`, but it's
-	// a simple object with email, name and password.
-
 	user?: User;
-
 	loading: boolean;
 	error?: any;
+
 	login: (user: { email: string; password: string }) => void;
 	register: (user: { email: string; name: string; password: string }) => void;
+	logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -32,7 +36,19 @@ export function AuthProvider({
 	const [error, setError] = useState<any>();
 	const [loading, setLoading] = useState<boolean>(false);
 
-	// const navigate = useNavigate();
+	useEffect(() => {
+		const data = localStorage.getItem('session');
+
+		if (!data) {
+			return;
+		}
+
+		const { _id: id, name, email, token } = JSON.parse(data);
+
+		if (id && name && email && token) {
+			setUser({ id, name, email, token });
+		}
+	}, []);
 
 	function login(user: { email: string; password: string }) {
 		setLoading(true);
@@ -40,14 +56,8 @@ export function AuthProvider({
 		api
 			.login(user)
 			.then((res) => {
-				setUser({
-					id: res._id,
-					name: res.name,
-					email: res.email,
-					token: res.token,
-				});
-
-				// navigate('/', { replace: true });
+				const { _id: id, name, email, token } = res;
+				setUser({ id, name, email, token });
 			})
 			.catch((error) => setError(error))
 			.finally(() => setLoading(false));
@@ -59,15 +69,15 @@ export function AuthProvider({
 		api
 			.register(user)
 			.then((res) => {
-				setUser({
-					id: res._id,
-					name: res.name,
-					email: res.email,
-					token: res.token,
-				});
+				const { _id: id, name, email, token } = res;
+				setUser({ id, name, email, token });
 			})
 			.catch((error) => setError(error))
 			.finally(() => setLoading(false));
+	}
+
+	function logout() {
+		api.logout();
 	}
 
 	return (
@@ -78,6 +88,7 @@ export function AuthProvider({
 				error,
 				login,
 				register,
+				logout,
 			}}
 		>
 			{children}
