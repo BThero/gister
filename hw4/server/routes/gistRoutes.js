@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const {
-	getGists,
+	getPublicGists,
+	getMyGists,
 	setGist,
 	updateGist,
 	deleteGist,
@@ -10,7 +11,8 @@ const {
 
 const { protect } = require('../middleware/authMiddleware');
 
-router.route('/').get(protect, getGists).post(protect, setGist);
+router.route('/public').get(protect, getPublicGists);
+router.route('/').get(protect, getMyGists).post(protect, setGist);
 router.route('/:id').put(protect, updateGist).delete(protect, deleteGist);
 
 module.exports = router;

@@ -1,26 +1,42 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
+import Header from './components/Header';
 import useAuth, { AuthProvider } from './modules/useAuth';
+import { SWRConfig } from 'swr';
 
 const AuthRouter = () => {
 	const { user } = useAuth();
 
 	const NotAuthenticated = lazy(() => import('./pages/NotAuthenticated'));
-	const Home = lazy(() => import('./pages/Home'));
+	const Router = lazy(() => import('./pages'));
 
-	if (!user) {
-		return <NotAuthenticated />;
-	} else {
-		return <Home />;
-	}
+	return (
+		<Suspense fallback={<div>loading...</div>}>
+			{!user ? (
+				<NotAuthenticated />
+			) : (
+				<SWRConfig
+					value={{
+						fetcher: (url) =>
+							fetch(url, {
+								headers: {
+									Authorization: `Bearer ${user.token}`,
+								},
+							}).then((res) => res.json()),
+					}}
+				>
+					<Router />
+				</SWRConfig>
+			)}
+		</Suspense>
+	);
 };
 
 const App = () => {
 	return (
-		<div>
-			<AuthProvider>
-				<AuthRouter />
-			</AuthProvider>
-		</div>
+		<AuthProvider>
+			<Header />
+			<AuthRouter />
+		</AuthProvider>
 	);
 };
 

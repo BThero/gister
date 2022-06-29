@@ -3,6 +3,7 @@ import {
 	ReactNode,
 	useContext,
 	useEffect,
+	useMemo,
 	useState,
 } from 'react';
 import * as api from '../api/users';
@@ -26,7 +27,6 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-// Export the provider as we need to wrap the entire app with it
 export function AuthProvider({
 	children,
 }: {
@@ -34,7 +34,7 @@ export function AuthProvider({
 }): JSX.Element {
 	const [user, setUser] = useState<User | undefined>();
 	const [error, setError] = useState<any>();
-	const [loading, setLoading] = useState<boolean>(false);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		const data = localStorage.getItem('session');
@@ -77,27 +77,29 @@ export function AuthProvider({
 	}
 
 	function logout() {
+		setUser(undefined);
 		api.logout();
 	}
 
+	const memoizedValue = useMemo<AuthContextType>(
+		() => ({
+			user,
+			loading,
+			error,
+			login,
+			register,
+			logout,
+		}),
+		[user, loading, error]
+	);
+
 	return (
-		<AuthContext.Provider
-			value={{
-				user,
-				loading,
-				error,
-				login,
-				register,
-				logout,
-			}}
-		>
+		<AuthContext.Provider value={memoizedValue}>
 			{children}
 		</AuthContext.Provider>
 	);
 }
 
-// Let's only export the `useAuth` hook instead of the context.
-// We only want to use the hook directly and never the context component.
 export default function useAuth() {
 	return useContext(AuthContext);
 }
