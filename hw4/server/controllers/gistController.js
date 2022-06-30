@@ -19,7 +19,11 @@ const getMyGists = asyncHandler(async (req, res) => {
 });
 
 const setGist = asyncHandler(async (req, res) => {
-	if (!req.body.title || !req.body.content || req.body.public === undefined) {
+	if (
+		!req.body.title ||
+		req.body.content === undefined ||
+		req.body.public === undefined
+	) {
 		res.status(400);
 		throw new Error('Please add a title, content and public');
 	}
@@ -53,7 +57,7 @@ const updateGist = asyncHandler(async (req, res) => {
 		throw new Error('User not authorized');
 	}
 
-	const updatedGist = await Goal.findByIdAndUpdate(req.params.id, req.body, {
+	const updatedGist = await Gist.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
 	});
 

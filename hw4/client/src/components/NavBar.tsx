@@ -7,7 +7,7 @@ const NavBar = ({ current }: { current: 'public' | 'manage' }) => {
 
 	return (
 		<nav>
-			<ul className="p-4 flex flex-row justify-around text-xl border-b-2 border-black">
+			<ul className="p-4 flex flex-row justify-evenly text-xl border-b-2 border-black">
 				<li>
 					<Link
 						to="/public"
