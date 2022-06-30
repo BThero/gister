@@ -6,7 +6,7 @@ const PublicGists = () => {
 	const { data, error } = useSWR('http://localhost:4000/api/gists/public');
 
 	if (!data && !error) {
-		return <div>loading...</div>;
+		return null;
 	}
 
 	if (error) {

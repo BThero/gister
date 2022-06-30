@@ -10,7 +10,7 @@ const ManageGists = () => {
 	const token = user!.token;
 
 	if (!data && !error) {
-		return <div>loading...</div>;
+		return null;
 	}
 
 	if (error) {
@@ -68,7 +68,7 @@ const ManageGists = () => {
 			<NavBar current="manage" />
 			<main className="flex flex-col items-center mt-2">
 				<button
-					className="border-[2px] border-blue-400 p-2 pl-4 pr-4 text-xl rounded w-50 hover:text-blue-400"
+					className="border-2 border-blue-400 p-2 pl-4 pr-4 text-xl rounded w-50 hover:text-blue-400"
 					onClick={() => {
 						handleAddGist();
 					}}

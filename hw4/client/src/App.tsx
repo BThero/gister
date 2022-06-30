@@ -10,7 +10,7 @@ const AuthRouter = () => {
 	const Router = lazy(() => import('./pages'));
 
 	return (
-		<Suspense fallback={<div>loading...</div>}>
+		<Suspense fallback={<></>}>
 			{!user ? (
 				<NotAuthenticated />
 			) : (
