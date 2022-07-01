@@ -25,6 +25,8 @@ app.use('/api/users', require('./routes/userRoutes'));
 
 app.use(errorHandler);
 
-app.listen(port, () => {
-	console.log(`server started at port ${port}`);
-});
+// app.listen(port, () => {
+// 	console.log(`server started at port ${port}`);
+// });
+
+module.exports = app;
