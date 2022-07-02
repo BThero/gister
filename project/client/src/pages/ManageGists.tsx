@@ -4,11 +4,10 @@ import axios from 'axios';
 import Gist from 'components/Gist';
 import useAuth from 'modules/useAuth';
 import { IGist } from 'types/gist';
+import { backendUrl } from 'api/url';
 
 const ManageGists = () => {
-	const { data, error, mutate } = useSWR<IGist[]>(
-		'http://localhost:4000/api/gists'
-	);
+	const { data, error, mutate } = useSWR<IGist[]>(`${backendUrl}/api/gists`);
 	const { user } = useAuth();
 	const token = user!.token;
 
@@ -23,7 +22,7 @@ const ManageGists = () => {
 	const handleAddGist = async () => {
 		const gist = (
 			await axios.post<IGist>(
-				`http://localhost:4000/api/gists`,
+				`${backendUrl}/api/gists`,
 				{
 					title: 'New Title',
 					content: 'New Content',
@@ -41,7 +40,7 @@ const ManageGists = () => {
 	};
 
 	const handleDeleteGist = async (id: string) => {
-		await axios.delete(`http://localhost:4000/api/gists/${id}`, {
+		await axios.delete(`${backendUrl}/api/gists/${id}`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
@@ -51,7 +50,7 @@ const ManageGists = () => {
 	};
 
 	const handleUpdateGist = async (id: string, updates: Partial<IGist>) => {
-		await axios.put(`http://localhost:4000/api/gists/${id}`, updates, {
+		await axios.put(`${backendUrl}/api/gists/${id}`, updates, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},

@@ -15,6 +15,7 @@ TODO:
 
 - Migrate tests to Typescript as well
 - Create Docker stuff
+- Github CI/CD
 - Deploy application
 
 # Test users

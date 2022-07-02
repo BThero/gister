@@ -2,11 +2,10 @@ import useSWR from 'swr';
 import Gist from 'components/Gist';
 import NavBar from 'components/NavBar';
 import { IGist } from 'types/gist';
+import { backendUrl } from 'api/url';
 
 const PublicGists = () => {
-	const { data, error } = useSWR<IGist[]>(
-		'http://localhost:4000/api/gists/public'
-	);
+	const { data, error } = useSWR<IGist[]>(`${backendUrl}/api/gists/public`);
 
 	if (error) {
 		return <div>Error: {error}</div>;
