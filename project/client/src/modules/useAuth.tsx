@@ -7,16 +7,10 @@ import {
 	useState,
 } from 'react';
 import * as api from '../api/users';
-
-interface User {
-	id: string;
-	name: string;
-	email: string;
-	token: string;
-}
+import { IUserSafe } from 'types/user';
 
 interface AuthContextType {
-	user?: User;
+	user?: IUserSafe;
 	loading: boolean;
 	error?: any;
 
@@ -32,7 +26,7 @@ export function AuthProvider({
 }: {
 	children: ReactNode;
 }): JSX.Element {
-	const [user, setUser] = useState<User | undefined>();
+	const [user, setUser] = useState<IUserSafe | undefined>();
 	const [error, setError] = useState<any>();
 	const [loading, setLoading] = useState(false);
 
@@ -43,10 +37,10 @@ export function AuthProvider({
 			return;
 		}
 
-		const { _id: id, name, email, token } = JSON.parse(data);
+		const { _id, name, email, token } = JSON.parse(data);
 
-		if (id && name && email && token) {
-			setUser({ id, name, email, token });
+		if (_id && name && email && token) {
+			setUser({ _id, name, email, token });
 		}
 	}, []);
 
@@ -56,8 +50,7 @@ export function AuthProvider({
 		api
 			.login(user)
 			.then((res) => {
-				const { _id: id, name, email, token } = res;
-				setUser({ id, name, email, token });
+				setUser(res);
 			})
 			.catch((error) => setError(error))
 			.finally(() => setLoading(false));
@@ -69,8 +62,7 @@ export function AuthProvider({
 		api
 			.register(user)
 			.then((res) => {
-				const { _id: id, name, email, token } = res;
-				setUser({ id, name, email, token });
+				setUser(res);
 			})
 			.catch((error) => setError(error))
 			.finally(() => setLoading(false));

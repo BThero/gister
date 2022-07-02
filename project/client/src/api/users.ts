@@ -1,7 +1,11 @@
 import axios from 'axios';
+import { IUserSafe } from 'types/user';
 
 export async function login(user: { email: string; password: string }) {
-	const res = await axios.post('http://localhost:4000/api/users/login', user);
+	const res = await axios.post<IUserSafe>(
+		'http://localhost:4000/api/users/login',
+		user
+	);
 	localStorage.setItem('session', JSON.stringify(res.data));
 	return res.data;
 }
@@ -11,7 +15,10 @@ export async function register(user: {
 	email: string;
 	password: string;
 }) {
-	const res = await axios.post('http://localhost:4000/api/users', user);
+	const res = await axios.post<IUserSafe>(
+		'http://localhost:4000/api/users',
+		user
+	);
 	localStorage.setItem('session', JSON.stringify(res.data));
 	return res.data;
 }

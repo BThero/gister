@@ -3,34 +3,39 @@ import useSWR from 'swr';
 import axios from 'axios';
 import Gist from 'components/Gist';
 import useAuth from 'modules/useAuth';
+import { IGist } from 'types/gist';
 
 const ManageGists = () => {
-	const { data, error, mutate } = useSWR('http://localhost:4000/api/gists');
+	const { data, error, mutate } = useSWR<IGist[]>(
+		'http://localhost:4000/api/gists'
+	);
 	const { user } = useAuth();
 	const token = user!.token;
-
-	if (!data && !error) {
-		return null;
-	}
 
 	if (error) {
 		return <div>Error: {error}</div>;
 	}
 
+	if (!data) {
+		return null;
+	}
+
 	const handleAddGist = async () => {
-		const gist = await axios.post(
-			`http://localhost:4000/api/gists`,
-			{
-				title: 'New Title',
-				content: 'New Content',
-				public: false,
-			},
-			{
-				headers: {
-					Authorization: `Bearer ${token}`,
+		const gist = (
+			await axios.post<IGist>(
+				`http://localhost:4000/api/gists`,
+				{
+					title: 'New Title',
+					content: 'New Content',
+					public: false,
 				},
-			}
-		);
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			)
+		).data;
 
 		mutate([...data, gist]);
 	};
@@ -42,10 +47,10 @@ const ManageGists = () => {
 			},
 		});
 
-		mutate(data.filter((item: any) => item._id !== id));
+		mutate(data.filter((item) => item._id !== id));
 	};
 
-	const handleUpdateGist = async (id: string, updates: any) => {
+	const handleUpdateGist = async (id: string, updates: Partial<IGist>) => {
 		await axios.put(`http://localhost:4000/api/gists/${id}`, updates, {
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -53,7 +58,7 @@ const ManageGists = () => {
 		});
 
 		mutate(
-			data.map((item: any) => {
+			data.map((item) => {
 				if (item._id === id) {
 					return { ...item, updates };
 				} else {
@@ -76,7 +81,7 @@ const ManageGists = () => {
 					Add New Gist
 				</button>
 				<ul className="flex flex-col items-center w-full">
-					{data.map((item: any) => {
+					{data.map((item) => {
 						return (
 							<li className="w-1/3" key={item._id}>
 								<Gist

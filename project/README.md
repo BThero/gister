@@ -3,7 +3,19 @@
 Server-side code (Node.js, Express, MongoDB, etc) is located in `server` folder.
 Client-side (Frontend) is located in `client` folder.
 
-Client-side uses `Create React App` with some basic interface, features and libraries **(I still did not implement logout feature though :()**
+Client-side uses `Create React App` with some basic interface, features and libraries
+
+Updates 02.07.22:
+
+- Logout implemented on front-end side
+- Application migrated to Typescript
+- Tests are created and running
+
+TODO:
+
+- Migrate tests to Typescript as well
+- Create Docker stuff
+- Deploy application
 
 # Test users
 
