@@ -1,24 +1,17 @@
-const request = require('supertest');
-const app = require('../server');
-const User = require('../models/userModel');
-const Gist = require('../models/gistModel');
-
-const sleep = (ms) =>
-	new Promise((resolve) => {
-		setTimeout(resolve, ms);
-	});
+import request from 'supertest';
+import app from '../app';
+import { clear } from './utils';
+import { connectDB, disconnectDB } from '../config/db';
 
 describe('Test auth logic', () => {
 	beforeAll(async () => {
-		// For MongoDB connection
-		await sleep(1000);
+		await connectDB();
+		await clear();
+	});
 
-		const user = await User.findOne({ email: 'jest@example.com' });
-
-		if (user) {
-			await Gist.deleteMany({ user: user._id });
-			await user.remove();
-		}
+	afterAll(async () => {
+		await clear();
+		await disconnectDB();
 	});
 
 	test('Should handle user register & login correctly', async () => {
