@@ -10,20 +10,20 @@ Updates 02.07.22:
 - Logout implemented on front-end side
 - Application migrated to Typescript
 - Tests are created and running
+- Tests migrated to Typescript
+
+Updates 03.07.22:
+
+- Docker stuff created and working
+- Application deployed
+
+Frontend link: https://baibolov-temirlan-hs.vercel.app/public
+Backend link: https://protected-plateau-31619.herokuapp.com/
 
 TODO:
 
-- Migrate tests to Typescript as well
-- Create Docker stuff
 - Github CI/CD
-- Deploy application
-
-# Test users
-
-You can freely register your own accounts, but for testing purposes there are some users I created:
-
-- email: `admin`, password: `admin`
-- email: `user`, password: `user`
+- Fix some small errors/inconsistencies
 
 # Launch the app
 
