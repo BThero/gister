@@ -1,6 +1,6 @@
-const asyncHandler = require('express-async-handler');
-const Gist = require('../models/gistModel');
-const User = require('../models/userModel');
+import asyncHandler from 'express-async-handler';
+import Gist from '../models/gistModel';
+import User from '../models/userModel';
 
 const getPublicGists = asyncHandler(async (req, res) => {
 	const gists = await Gist.find({
@@ -87,10 +87,4 @@ const deleteGist = asyncHandler(async (req, res) => {
 	res.status(200).json({ id: req.params.id });
 });
 
-module.exports = {
-	getMyGists,
-	getPublicGists,
-	setGist,
-	updateGist,
-	deleteGist,
-};
+export { getMyGists, getPublicGists, setGist, updateGist, deleteGist };

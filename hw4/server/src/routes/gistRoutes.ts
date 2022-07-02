@@ -1,18 +1,18 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import { protect } from '../middleware/authMiddleware.js';
 
-const {
+import {
 	getPublicGists,
 	getMyGists,
 	setGist,
 	updateGist,
 	deleteGist,
-} = require('../controllers/gistController');
+} from '../controllers/gistController';
 
-const { protect } = require('../middleware/authMiddleware');
+const router = express.Router();
 
 router.route('/public').get(protect, getPublicGists);
 router.route('/').get(protect, getMyGists).post(protect, setGist);
 router.route('/:id').put(protect, updateGist).delete(protect, deleteGist);
 
-module.exports = router;
+export default router;

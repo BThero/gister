@@ -1,6 +1,15 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import { IUser } from './userModel';
 
-const gistSchema = mongoose.Schema(
+interface IGist {
+	title: string;
+	content: string;
+	public: boolean;
+	author: string;
+	user: IUser;
+}
+
+const gistSchema = new mongoose.Schema<IGist>(
 	{
 		title: {
 			type: String,
@@ -29,4 +38,7 @@ const gistSchema = mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model('Gist', gistSchema);
+const Gist = mongoose.model('Gist', gistSchema);
+
+export default Gist;
+export { IGist };

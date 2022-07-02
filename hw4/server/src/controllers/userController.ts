@@ -1,7 +1,9 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const asyncHandler = require('express-async-handler');
-const User = require('../models/userModel');
+import { sign } from 'jsonwebtoken';
+
+import bcrypt from 'bcryptjs';
+import asyncHandler from 'express-async-handler';
+import User from '../models/userModel';
+import { Types } from 'mongoose';
 
 const registerUser = asyncHandler(async (req, res) => {
 	const { name, email, password } = req.body;
@@ -62,13 +64,10 @@ const loginUser = asyncHandler(async (req, res) => {
 	}
 });
 
-const generateToken = (id) => {
-	return jwt.sign({ id }, process.env.JWT_SECRET, {
+const generateToken = (id: Types.ObjectId) => {
+	return sign({ id }, process.env.JWT_SECRET, {
 		expiresIn: '30d',
 	});
 };
 
-module.exports = {
-	registerUser,
-	loginUser,
-};
+export { registerUser, loginUser };
