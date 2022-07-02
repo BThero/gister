@@ -4,8 +4,7 @@
 	"description": "",
 	"main": "dist/server.js",
 	"scripts": {
-		"prestart": "npm run build",
-		"build": "tsc",
+		"postinstall": "tsc",
 		"test": "jest --runInBand",
 		"start": "node dist/server.js",
 		"dev": "nodemon dist/server.js"
