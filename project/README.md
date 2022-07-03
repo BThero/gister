@@ -17,7 +17,7 @@ Updates 03.07.22:
 - Docker stuff created and working
 - Application deployed
 
-Frontend link: https://baibolov-temirlan-hs.vercel.app/public
+Frontend link: [https://baibolov-temirlan-hs.vercel.app/public](https://baibolov-temirlan-80ydx1qnv-bthero.vercel.app/public)
 Backend link: https://protected-plateau-31619.herokuapp.com/
 
 TODO:
