@@ -1,10 +1,24 @@
 import asyncHandler from 'express-async-handler';
 import Gist from '../models/gistModel';
-import User from '../models/userModel';
 
 const getPublicGists = asyncHandler(async (req, res) => {
+	const search = req.params.search || '';
 	const gists = await Gist.find({
 		public: true,
+		$or: [
+			{
+				title: {
+					$regex: search,
+					$options: 'i',
+				},
+			},
+			{
+				author: {
+					$regex: search,
+					$options: 'i',
+				},
+			},
+		],
 	});
 
 	res.status(200).json(gists);

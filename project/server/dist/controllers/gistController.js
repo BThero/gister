@@ -16,8 +16,24 @@ exports.deleteGist = exports.updateGist = exports.setGist = exports.getPublicGis
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const gistModel_1 = __importDefault(require("../models/gistModel"));
 const getPublicGists = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const search = req.params.search;
+    console.log('GET public', search);
     const gists = yield gistModel_1.default.find({
         public: true,
+        $or: [
+            {
+                title: {
+                    $regex: search || '',
+                    $options: 'i',
+                },
+            },
+            {
+                author: {
+                    $regex: search || '',
+                    $options: 'i',
+                },
+            },
+        ],
     });
     res.status(200).json(gists);
 }));

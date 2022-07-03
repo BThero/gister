@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 const db_1 = require("./config/db");
 (0, db_1.connectDB)();
-app_1.default.listen(4000);
+app_1.default.listen(process.env.PORT || 80);
 //# sourceMappingURL=server.js.map

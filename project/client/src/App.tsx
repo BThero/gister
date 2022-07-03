@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import Header from './components/Header';
 import useAuth, { AuthProvider } from './modules/useAuth';
 import { SWRConfig } from 'swr';
+import Loading from './components/Loading';
 
 const AuthRouter = () => {
 	const { user } = useAuth();
@@ -10,7 +11,7 @@ const AuthRouter = () => {
 	const Router = lazy(() => import('./pages'));
 
 	return (
-		<Suspense fallback={<></>}>
+		<Suspense fallback={<Loading />}>
 			{!user ? (
 				<NotAuthenticated />
 			) : (

@@ -12,6 +12,7 @@ import {
 const router = express.Router();
 
 router.route('/public').get(protect, getPublicGists);
+router.route('/public/:search').get(protect, getPublicGists);
 router.route('/').get(protect, getMyGists).post(protect, setGist);
 router.route('/:id').put(protect, updateGist).delete(protect, deleteGist);
 

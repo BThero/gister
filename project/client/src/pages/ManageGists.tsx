@@ -5,6 +5,7 @@ import Gist from 'components/Gist';
 import useAuth from 'modules/useAuth';
 import { IGist } from 'types/gist';
 import { backendUrl } from 'api/url';
+import Loading from 'components/Loading';
 
 const ManageGists = () => {
 	const { data, error, mutate } = useSWR<IGist[]>(`${backendUrl}/api/gists`);
@@ -16,7 +17,7 @@ const ManageGists = () => {
 	}
 
 	if (!data) {
-		return null;
+		return <Loading />;
 	}
 
 	const handleAddGist = async () => {
