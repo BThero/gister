@@ -1,2 +1,2 @@
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = import.meta.env.VITE_API_URL;
 export { backendUrl };
