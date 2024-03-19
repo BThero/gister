@@ -1,14 +1,12 @@
-version: '3.8'
-services:
-  backend:
-    build: ./server
-    restart: unless-stopped
-    env_file: server/.env
-  frontend:
-    build: ./client
-    env_file: client/.env
-    ports:
-      - 3000:3000
+# Use root/example as user/password credentials
+version: "3.1"
 
-volumes:
-  db:
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
